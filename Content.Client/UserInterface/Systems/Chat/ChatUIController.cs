@@ -132,6 +132,10 @@ public sealed partial class ChatUIController : UIController
     private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
     private string[] _chatNameColors = default!;
     private bool _chatNameColorsEnabled;
+    // Start - ganimed transliteration
+    private bool _translitEnToRuEnabled;
+    private bool _translitRuToEnEnabled;
+    // End - ganimed transliteration
 
     private ISawmill _sawmill = default!;
 
@@ -260,6 +264,12 @@ public sealed partial class ChatUIController : UIController
         SubscribeNetworkEvent<DamageForceSayEvent>(OnDamageForceSay);
         _config.OnValueChanged(CCVars.ChatEnableColorName, (value) => { _chatNameColorsEnabled = value; });
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
+        // Start - ganimed transliteration
+        _config.OnValueChanged(CCVars.TransliterationEnToRu, (value) => { _translitEnToRuEnabled = value; });
+        _config.OnValueChanged(CCVars.TransliterationRuToEn, (value) => { _translitRuToEnEnabled = value; });
+        _translitEnToRuEnabled = _config.GetCVar(CCVars.TransliterationEnToRu);
+        _translitRuToEnEnabled = _config.GetCVar(CCVars.TransliterationRuToEn);
+        // End - ganimed transliteration
 
         _speechBubbleRoot = new LayoutContainer();
 
@@ -857,6 +867,12 @@ public sealed partial class ChatUIController : UIController
         _typingIndicator?.ClientSubmittedChatText();
 
         var text = box.ChatInput.Input.Text;
+        // Start - ganimed transliteration - by doing this right here we allow chernorussians to use channels like normal, for example by doing .i POMOGITE NABEG it turns into .и ПОМОГИТЕ НАБЕГ and goes through as a radio message
+        if (_translitEnToRuEnabled)
+        {
+            text = ChatTransliterationSystem.TransliterateEnglishToRussian(text);
+        }
+        // End - ganimed transliteration
         box.ChatInput.Input.Clear();
         box.ChatInput.Input.ReleaseKeyboardFocus();
         UpdateSelectedChannel(box);
@@ -990,6 +1006,13 @@ public sealed partial class ChatUIController : UIController
         }
         // Goobstation end
         #endregion
+
+        // Start - ganimed transliteration
+        if (_translitRuToEnEnabled)
+        {
+            msg.WrappedMessage = ChatTransliterationSystem.TransliterateRussianToEnglish(msg.WrappedMessage);
+        }
+        // End - ganimed transliteration
 
         // Log all incoming chat to repopulate when filter is un-toggled
         if (!msg.HideChat)
