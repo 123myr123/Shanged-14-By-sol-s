@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2025 RedFoxIV <38788538+RedFoxIV@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 ReserveBot <211949879+ReserveBot@users.noreply.github.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
