@@ -52,6 +52,7 @@ public sealed class OrbitVisualsSystem : EntitySystem
             sprite.DirectionOverride = Direction.South;
         }
 
+        // Reserve edit START: Port WWDP, CustomGhost
         var animationPlayer = EnsureComp<AnimationPlayerComponent>(uid);
         if (_animations.HasRunningAnimation(uid, animationPlayer, _orbitAnimationKey))
             return;
@@ -62,6 +63,7 @@ public sealed class OrbitVisualsSystem : EntitySystem
         }
 
         _animations.Play(uid, animationPlayer, GetOrbitAnimation(component), _orbitAnimationKey);
+        // Reserve edit END: Port WWDP, CustomGhost
     }
 
     private void OnComponentRemove(EntityUid uid, OrbitVisualsComponent component, ComponentRemove args)
@@ -71,6 +73,7 @@ public sealed class OrbitVisualsSystem : EntitySystem
 
         sprite.EnableDirectionOverride = false;
 
+        // Reserve edit START: Port WWDP, CustomGhost
         var animationPlayer = EnsureComp<AnimationPlayerComponent>(uid);
         if (_animations.HasRunningAnimation(uid, animationPlayer, _orbitAnimationKey))
         {
@@ -81,8 +84,10 @@ public sealed class OrbitVisualsSystem : EntitySystem
         {
             _animations.Play(uid, animationPlayer, GetStopAnimation(component, sprite), _orbitStopKey);
         }
+        // Reserve edit END: Port WWDP, CustomGhost
     }
 
+    // Reserve edit START: Port WWDP, CustomGhost
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
@@ -92,11 +97,13 @@ public sealed class OrbitVisualsSystem : EntitySystem
             var angle = new Angle(Math.PI * 2 * orbit.Orbit);
             var vec = angle.RotateVec(new Vector2(orbit.OrbitDistance, 0));
 
-            sprite.Rotation = orbit.KeepUpright ? Angle.Zero : angle; // WWDP EDIT
+            sprite.Rotation = orbit.KeepUpright ? Angle.Zero : angle;
             sprite.Offset = vec;
         }
     }
+    // Reserve edit END: Port WWDP, CustomGhost
 
+    // Reserve edit START: Port WWDP, CustomGhost
     private void OnAnimationCompleted(EntityUid uid, OrbitVisualsComponent component, AnimationCompletedEvent args)
     {
         if (args.Key == _orbitAnimationKey && TryComp(uid, out AnimationPlayerComponent? animationPlayer))
@@ -104,7 +111,9 @@ public sealed class OrbitVisualsSystem : EntitySystem
             _animations.Play(uid, animationPlayer, GetOrbitAnimation(component), _orbitAnimationKey);
         }
     }
+    // Reserve edit END: Port WWDP, CustomGhost
 
+    // Reserve edit START: Port WWDP, CustomGhost
     private Animation GetOrbitAnimation(OrbitVisualsComponent component)
     {
         var length = component.OrbitLength;
@@ -128,6 +137,7 @@ public sealed class OrbitVisualsSystem : EntitySystem
             }
         };
     }
+    // Reserve edit END: Port WWDP, CustomGhost
 
     private Animation GetStopAnimation(OrbitVisualsComponent component, SpriteComponent sprite)
     {
