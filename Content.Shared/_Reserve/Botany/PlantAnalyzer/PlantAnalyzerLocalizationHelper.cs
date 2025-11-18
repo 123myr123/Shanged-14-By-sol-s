@@ -14,14 +14,13 @@ public sealed class PlantAnalyzerLocalizationHelper
         if (gases.Count == 0)
             return "";
 
-        List<int> gasIds = [];
-        foreach (var gas in gases)
-            gasIds.Add((int)gas);
-
         List<string> gasesLoc = [];
-        foreach (var gas in protMan.EnumeratePrototypes<GasPrototype>())
-            if (gasIds.Contains(int.Parse(gas.ID)))
-                gasesLoc.Add(Loc.GetString(gas.Name));
+        foreach (var gas in gases)
+        {
+            var gasId = ((int)gas).ToString();
+            if (protMan.TryIndex<GasPrototype>(gasId, out var prototype))
+                gasesLoc.Add(Loc.GetString(prototype.Name));
+        }
 
         return ContentLocalizationManager.FormatList(gasesLoc);
     }

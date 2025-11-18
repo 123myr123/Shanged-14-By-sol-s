@@ -23,7 +23,7 @@ public abstract class AbstractAnalyzerSystem<TAnalyzerComponent, TAnalyzerDoAfte
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] protected readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
 
@@ -156,10 +156,10 @@ public abstract class AbstractAnalyzerSystem<TAnalyzerComponent, TAnalyzerDoAfte
     }
 
     /// <summary>
-    /// Remove the analyzer from the active list, and remove the component if it has no active analyzers
+    /// Stop analyzing the target entity and deactivate the analyzer
     /// </summary>
     /// <param name="analyzer">The analyzer that's receiving the updates</param>
-    /// <param name="target">The entity to analyze</param>
+    /// <param name="target">The entity to stop analyzing</param>
     private void StopAnalyzingEntity(Entity<TAnalyzerComponent> analyzer, EntityUid target)
     {
         //Unlink the analyzer
