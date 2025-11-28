@@ -277,15 +277,16 @@ namespace Content.Client.RoundEnd
                 if (playerInfo.EntMobState == MobState.Dead
                     && playerInfo.DamagePerGroup.Values.Any(v => v > 0))
                 {
+                    // reserve edit start
                     var totalDamage = playerInfo.DamagePerGroup.Values.Sum(static v => (decimal) v);
                     var severityAdj = totalDamage switch
                     {
-                        >= 1000 => "catastrophic",
-                        >= 750 => "devastating",
-                        >= 500 => "agonizing",
-                        >= 300 => "painful",
-                        >= 200 => "brutal",
-                        _ => "tragic"
+                        >= 1000 => "катастрофичного",
+                        >= 750 => "разрушительного",
+                        >= 500 => "мучительного",
+                        >= 300 => "болезненного",
+                        >= 200 => "беспощадного",
+                        _ => "трагичного"
                     };
 
                     var highestDamage = playerInfo.DamagePerGroup
@@ -293,15 +294,16 @@ namespace Content.Client.RoundEnd
                         .First();
                     var typeAdj = highestDamage.Key switch
                     {
-                        "Burn" => "fiery",
-                        "Brute" => "crushing",
-                        "Toxin" => "poisonous",
-                        "Airloss" => "suffocating",
-                        "Genetic" => "twisted",
-                        "Metaphysical" => "otherworldly",
-                        "Electronic" => "shocking",
-                        _ => "mysterious",
+                        "Burn" => "ожога",
+                        "Brute" => "давления",
+                        "Toxin" => "отравления",
+                        "Airloss" => "удушения",
+                        "Genetic" => "генетического изменения",
+                        "Metaphysical" => "метафизического воздействия",
+                        "Electronic" => "электрического шока",
+                        _ => "неизвестного источника урона",
                     };
+                    // reserve edit end
 
                     deathLabel.SetMarkup(
                         Loc.GetString("round-end-summary-window-death",
