@@ -32,8 +32,8 @@ ent-ActionMakeRevenant = Стать Ревенантом
 
 # Plaguebringer actions
 
-ent-BaseCurseAction = { ent-BaseAction }
-    .desc = { ent-BaseAction.desc }
+ent-BaseCurseAction = { "" }
+    .desc = { "" }
 ent-ActionCurseBlindness = Проклять ослеплением
     .desc = Прокляните живое существо слепотой.
 ent-ActionCurseWeakness = Проклять слабостью

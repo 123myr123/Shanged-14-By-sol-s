@@ -22,5 +22,5 @@ ent-SpawnPointLaughterDemonToken = точка появление демон см
     .desc = { "" }
 ent-AncientRogueKingToken = { ent-SpawnPointGhostAncientRogueKing }
     .desc = { ent-SpawnPointGhostAncientRogueKing.desc }
-ent-WraithToken = { ent-SpawnPointGhostWraith }
-    .desc = { ent-SpawnPointGhostWraith.desc }
+ent-WraithToken = точка появления фантом
+    .desc = { "" }
