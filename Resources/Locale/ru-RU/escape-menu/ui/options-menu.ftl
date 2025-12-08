@@ -394,12 +394,6 @@ ui-options-admin-overlay-merge-distance = Расстояние слияния с
 ui-options-admin-overlay-ghost-fade-distance = Расстояние начала затухания оверлея при наведении
 ui-options-admin-overlay-ghost-hide-distance = Расстояние полного затухания оверлея при наведении
 
-ui-options-chat-window-opacity = Непрозрачность окна чата
-ui-options-speech-bubble-text-opacity = Непрозрачность текста речевого пузыря
-ui-options-speech-bubble-speaker-opacity = Непрозрачность диктора речевого пузыря
-ui-options-speech-bubble-background-opacity = Непрозрачность фона речевого пузыря
-ui-options-censor-nudity = Цензура обнажённых персонажей
-
 ## ganimed->reserve port - TranslitSystem
 ui-options-toggle-translit-en-to-ru = (Чат) Транслитерирует ваш ввод в латинском алфавите на кириллицу
 ui-options-toggle-translit-ru-to-en = (Чат) Транслитерирует все в окне чата с кириллицы на латиницу
