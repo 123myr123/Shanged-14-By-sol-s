@@ -386,4 +386,12 @@ namespace Content.Shared.Ghost
 
     [Serializable, NetSerializable]
     public sealed class GhostReturnToRoundRequest : EntityEventArgs; // Reserve - Respawn
+
+    /// <summary>
+    /// Goobstation - A server to client request for them to spawn at the ghost bar
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class GhostBarSpawnEvent : EntityEventArgs
+    {
+    }
 }
