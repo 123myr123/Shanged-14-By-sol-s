@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: LobbyMusic
+  files:
+    - /Audio/Lobby/music.ogg
+    - /Audio/Lobby/music_1.ogg
+    
